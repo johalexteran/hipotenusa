@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.min.css">
+    <title>Hipotenusa </title>
+</head>
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+<script>
+    function calcular(lado_a, lado_b) {
+        var parametros = {
+            "lado_a": lado_a,
+            "lado_b": lado_b
+        };
+        $.ajax({
+            url: "ejecutar.php",
+            type: "post",
+            data: parametros,
+            beforeSend: function () {
+                $("#resp").html("Conectando..");
+            },
+            fail: function () {
+                $("#resp").html("Error");
+            },
+            success: function (response) {
+                $("#resp").html(response);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    }
+</script>
+
+<body>
+<div class="box">
+
+    <h1>Calculo de la hipotenusa</h1>
+
+    <div class="form-group col-md-8">
+        <label>Valor del lado A</label>
+        <input class="form-control" type="number" name="lado_a" id="lado_a">
+    </div>
+
+    <div class="form-group col-md-8">
+        <label>Valor del lado B</label>
+        <input  class="form-control" type="number" name="lado_b" id="lado_b">
+    </div>
+
+
+    <div class="">
+        <button onclick="calcular($('#lado_a').val(), $('#lado_b').val())" class="btn btn-primary"
+            type="submit" name="action">Calcular
+        </button>
+
+
+
+
+    </div>
+
+</div>
+    <div id="resp" class="box1">
+       <h3>Resultado</h3>
+
+
+
+    </div>
+
+
+</body>
+
+</html>
